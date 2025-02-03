@@ -34,6 +34,17 @@ for (const char of target_string_list){
 console.log('Target String: '+ target_string)
 console.log('Target Word: ' + target_word)
 
+
+let errors = 0;
+
+let slides = document.getElementsByClassName('slide');
+
+for (let i=1; i < slides.length; i++){
+    slides[i].style.display = "none";
+}
+
+
+
 // Adding eventlisteners to keys and defining the function that 
 // registers the guess that was made.
 
@@ -46,12 +57,27 @@ Array.from(keys).forEach(function(element){
 
         console.log('Guessed: ' + guess);
         
-        element.disabled = true;
+        if (target_word.includes(guess)){
+            element.style.backgroundColor = "green";
+            element.style.color = "white";
+        }
+        else{
+            element.style.backgroundColor = "red";
+            element.style.color = "white";
+            slides[errors].style.display = "none";
+            errors += 1;
+            slides[errors].style.display = "block";
+        }
 
+        element.disabled = true;
+        console.log(errors);
     });
 })
 
-let errors = 0;
+
+
+
+
 
 
 
